@@ -6,7 +6,8 @@ public class FileManager {
 
     private String originalFilePath;
     private String pathToTheModifiedFile; //нужен ли он здесь?
-    private Path path;
+    private Path pathIn;
+    private Path pathOut;
     Files files;
 
     public FileManager(String originalFilePath) {
@@ -21,25 +22,32 @@ public class FileManager {
         this.originalFilePath = originalFilePath;
     }
 
-    public byte[] readTheUserFile (){
-        path = Path.of(originalFilePath);
-        path = path.toAbsolutePath();
-        byte [] originalFileBytesArray = null;
+    public String readTheUserFile (){
+        pathIn = Path.of(originalFilePath);
+        //pathIn = pathIn.toAbsolutePath();
+        String lineFromFile = null;
         try {
-            originalFileBytesArray = Files.readAllBytes(path);
-            System.out.println("Успешно прочел файл" + "\nКоличество байт в файле: " + originalFileBytesArray.length);
+            lineFromFile = Files.readString(pathIn);
+            System.out.println("Успешно прочел файл и записал его в виде строки");
         } catch (IOException e) {
             e.getMessage();
         }
 
-        return originalFileBytesArray;
+        return lineFromFile;
     }
 
-    public byte[] writeTheUserFile(byte [] modifiedFileBytesArray){
+    public String writeTheUserFile(String modifiedString){
 
-        // будет позднее
+        String outputString = "Файл успешно записан";
 
-        return null;
+        pathOut = Path.of(pathToTheModifiedFile);
+
+        //pathOut = pathOut.toAbsolutePath();
+
+
+
+
+        return outputString;
     }
 
 
