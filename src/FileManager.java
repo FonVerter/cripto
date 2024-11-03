@@ -5,7 +5,7 @@ import java.nio.file.Path;
 public class FileManager {
 
     private String pathToOriginalFile;
-    private String pathToTheModifiedFile; //нужен ли он здесь?
+    private String pathToTheModifiedFile;
     private Path pathIn;
     private Path pathOut;
 
