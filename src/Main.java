@@ -19,7 +19,7 @@ public class Main {
         FileManager fileManagerTest = new FileManager(patttthTest);
         System.out.println("Информация о прочитанном файле ");
         System.out.println("---".repeat(50));
-        String readingFilesString = fileManagerTest.readTheUserFile();
+        String readingFilesString = fileManagerTest.readUserFile();
         System.out.println("---".repeat(50));
         System.out.println("Отчет закончен");
         System.out.println("---".repeat(50));
@@ -29,11 +29,11 @@ public class Main {
         Cipher russianAlphabet = new Cipher();
         HashMap<Character, Character> newAlphabet = russianAlphabet.createNewAlphabet(shiftValue);
 
-        String s = russianAlphabet.encryptString(readingFilesString, newAlphabet);
-//
-//
-//        FileManager fileOutputManager = new FileManager(pathResultFiles);
-//        fileOutputManager.writeTheUserFile(s);
+        String s = russianAlphabet.encryptTheString(readingFilesString, newAlphabet);
+
+
+        FileManager fileOutputManager = new FileManager(pathResultFiles, 1);
+        fileOutputManager.writeTheUserFile(s);
 
 
     }

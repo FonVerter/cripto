@@ -2,13 +2,10 @@ import java.util.HashMap;
 
 public class Cipher {
 
-    private int key;
-//    int userShiftSymbol;
 
     public Cipher() {
 
     }
-
 
     private static final char[] ALPHABET = {'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з',
             'и', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
@@ -33,22 +30,27 @@ public class Cipher {
     }
 
 
-    public String encryptString(String string, HashMap<Character, Character> modifiedAlphabet) {
-        String encryptString = "";
+    public String encryptTheString(String string, HashMap<Character, Character> modifiedAlphabet) {
+
+        StringBuilder outputStringBuilder = new StringBuilder();
 
         char[] inputCharacterArray = string.toCharArray();
-        char[] outputCharacterArray = new char[inputCharacterArray.length];
 
         for (int i = 0; i < inputCharacterArray.length; i++) {
+            char currentChar = Character.toLowerCase(inputCharacterArray[i]);
+            Character encryptedChar = modifiedAlphabet.get(currentChar);
 
-
-            outputCharacterArray[i] = modifiedAlphabet.get(Character.toLowerCase(inputCharacterArray[i]));
-
-
+            // Проверяем, был ли найден символ в modifiedAlphabet
+            if (encryptedChar != null) {
+                outputStringBuilder.append(encryptedChar);
+            } else {
+                // Если символ не найден, добавляем оригинальный символ
+                outputStringBuilder.append(inputCharacterArray[i]);
+            }
         }
 
 
-        return outputCharacterArray.toString();
+        return outputStringBuilder.toString();
 
     }
 
