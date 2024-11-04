@@ -22,18 +22,36 @@ public class Main {
                 HashMap<Character, Character> newAlphabet = russianAlphabet.createNewAlphabet(shiftValue);
                 String s = russianAlphabet.encryptTheString(readingFilesString, newAlphabet);
                 fileManagerTest.writeTheUserFile(s);
-                System.out.println("Файл успешно зашифрован. Адрес зашифрованного файла: \n" + fileManagerTest.getPathIn());
+                System.out.println("Файл успешно зашифрован.");
                 break;
 
             case 2:
-                System.out.println("Тут будем дешифровывать");
+                System.out.println("Введи путь к файлу который надо расшифровать:");
+                Scanner pathToEncryptedFile = new Scanner(System.in);
+                String pathToFile2 = pathToEncryptedFile.nextLine();
+                System.out.println("Введи секретный ключ:");
+                Scanner secretKey2 = new Scanner(System.in);
+                int shiftValue2 = secretKey2.nextInt();
+
+                if (shiftValue2 > 0) {
+                    shiftValue2 = -shiftValue2;
+                } else {
+                    shiftValue2 = shiftValue2;
+                }
+
+                FileManager fileManagerTest2 = new FileManager(pathToFile2);
+                String readingFilesString2 = fileManagerTest2.readUserFile();
+                Cipher russianAlphabet2 = new Cipher();
+                HashMap<Character, Character> newAlphabet2 = russianAlphabet2.createNewAlphabet(shiftValue2);
+                String s2 = russianAlphabet2.encryptTheString(readingFilesString2, newAlphabet2);
+                fileManagerTest2.writeTheUserFile(s2);
+                System.out.println("Файл успешно зашифрован.");
                 break;
 
             case 3:
                 System.out.println("Здесь будем дешифровывать методом брутфорс");
 
         }
-
 
 
     }
