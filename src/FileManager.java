@@ -4,14 +4,11 @@ import java.nio.file.Path;
 
 public class FileManager {
 
-    private String pathToOriginalFile;
-    private String pathToTheModifiedFile;
+    private final String pathToOriginalFile;
     private Path pathIn;
-    private Path pathOut;
 
-
-    public FileManager(String pathToTheModifiedFile, int a) {
-        this.pathToTheModifiedFile = pathToTheModifiedFile;
+    public Path getPathIn() {
+        return pathIn;
     }
 
     public FileManager(String pathToOriginalFile) {
@@ -26,7 +23,6 @@ public class FileManager {
 
         try {
             lineFromFile = Files.readString(pathIn);
-            System.out.println("Успешно прочел файл и записал его в виде строки");
         } catch (IOException e) {
             e.getMessage();
         }
@@ -36,7 +32,14 @@ public class FileManager {
 
     public void writeTheUserFile(String modifiedString) {
 
-        pathOut = Path.of(pathToTheModifiedFile);
+        String newFileName = "modified_" + pathIn.getFileName();
+        Path pathOut = Path.of(newFileName);
+
+        try {
+            Files.createFile(pathOut);
+        } catch (IOException e) {
+            e.getMessage();
+        }
 
         try {
             Files.writeString(pathOut, modifiedString);

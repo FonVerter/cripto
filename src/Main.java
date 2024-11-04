@@ -4,36 +4,36 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("Привет! Что будем делать?\n-1 Шифровать \n-2 Расшифровывать\n-3 Расшифруем послание с помощью подбора");
 
-        System.out.println("Введите путь к файлу который надо зашифровать");
-        String patttthTest = scanner.nextLine();
+        Scanner helloScanner = new Scanner(System.in);
 
-        System.out.println("Введите смещение алфавита");
-        int shiftValue = scanner.nextInt();
+        switch (helloScanner.nextInt()) {
+            case 1:
+                System.out.println("Введи путь к файлу который надо зашифровать:");
+                Scanner pathToOriginalFile = new Scanner(System.in);
+                String pathToFile = pathToOriginalFile.nextLine();
+                System.out.println("Введи секретный ключ:");
+                Scanner secretKey = new Scanner(System.in);
+                int shiftValue = secretKey.nextInt();
+                FileManager fileManagerTest = new FileManager(pathToFile);
+                String readingFilesString = fileManagerTest.readUserFile();
+                Cipher russianAlphabet = new Cipher();
+                HashMap<Character, Character> newAlphabet = russianAlphabet.createNewAlphabet(shiftValue);
+                String s = russianAlphabet.encryptTheString(readingFilesString, newAlphabet);
+                fileManagerTest.writeTheUserFile(s);
+                System.out.println("Файл успешно зашифрован. Адрес зашифрованного файла: \n" + fileManagerTest.getPathIn());
+                break;
 
-        System.out.println("Введите путь к файлу в который запишем результат");
-        Scanner scanner1 = new Scanner(System.in);
-        String pathResultFiles = scanner1.nextLine();
+            case 2:
+                System.out.println("Тут будем дешифровывать");
+                break;
 
-        FileManager fileManagerTest = new FileManager(patttthTest);
-        System.out.println("Информация о прочитанном файле ");
-        System.out.println("---".repeat(50));
-        String readingFilesString = fileManagerTest.readUserFile();
-        System.out.println("---".repeat(50));
-        System.out.println("Отчет закончен");
-        System.out.println("---".repeat(50));
+            case 3:
+                System.out.println("Здесь будем дешифровывать методом брутфорс");
 
+        }
 
-        System.out.println("Преобразование алфавита");
-        Cipher russianAlphabet = new Cipher();
-        HashMap<Character, Character> newAlphabet = russianAlphabet.createNewAlphabet(shiftValue);
-
-        String s = russianAlphabet.encryptTheString(readingFilesString, newAlphabet);
-
-
-        FileManager fileOutputManager = new FileManager(pathResultFiles, 1);
-        fileOutputManager.writeTheUserFile(s);
 
 
     }
